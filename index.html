@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кофейня — лучший кофе с доставкой</title>
+    <style>
+        /* ===== ОБНУЛЕНИЕ И БАЗА ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #faf6f0;
+            color: #3d2b1f;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ===== ШАПКА ===== */
+        header {
+            background: #2c1810;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: #d4a373;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: #fff;
+        }
+
+        nav {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: #f0e2d3;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            color: #d4a373;
+        }
+
+        .cart-icon {
+            background: #d4a373;
+            color: #2c1810;
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 14px;
+            transition: background 0.3s;
+            cursor: default;
+        }
+
+        .cart-icon:hover {
+            background: #e8c99b;
+        }
+
+        /* ===== ПЕРВЫЙ ЭКРАН ===== */
+        .hero {
+            background:
+                linear-gradient(rgba(44, 24, 16, 0.5), rgba(44, 24, 16, 0.5)),
+                url('/images/kofe-chashka-kofeinye-zerna-seryi-fon.webp') no-repeat center center / cover;
+            background-attachment: fixed;
+            color: #fff;
+            padding: 80px 0 70px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(212, 163, 115, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 52px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+
+        .hero h1 span {
+            color: #d4a373;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: #d4c5b8;
+            max-width: 600px;
+            margin: 0 auto 35px;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background: #d4a373;
+            color: #2c1810;
+            padding: 16px 50px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background: #e8c99b;
+            transform: scale(1.05);
+            box-shadow: 0 8px 30px rgba(212, 163, 115, 0.3);
+        }
+
+        /* ===== КАТАЛОГ ===== */
+        .catalog {
+            padding: 60px 0 70px;
+            background: #faf6f0;
+        }
+
+        .catalog h2 {
+            text-align: center;
+            font-size: 38px;
+            margin-bottom: 15px;
+            color: #2c1810;
+        }
+
+        .catalog .subtitle {
+            text-align: center;
+            color: #7a6556;
+            font-size: 18px;
+            margin-bottom: 45px;
+        }
+
+        .catalog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 25px 20px 30px;
+            text-align: center;
+            box-shadow: 0 8px 30px rgba(44, 24, 16, 0.08);
+            transition: all 0.3s;
+            border: 1px solid #f0e8df;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 45px rgba(44, 24, 16, 0.15);
+            border-color: #d4a373;
+        }
+
+        .product-card img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 15px;
+        }
+
+        .product-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #2c1810;
+            margin-bottom: 5px;
+        }
+
+        .product-card .origin {
+            color: #7a6556;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .product-card .price {
+            font-size: 24px;
+            font-weight: 800;
+            color: #2c1810;
+            margin: 10px 0 15px;
+        }
+
+        .product-card .price span {
+            color: #7a6556;
+            font-size: 16px;
+            font-weight: 400;
+        }
+
+        .btn-order {
+            display: inline-block;
+            background: #2c1810;
+            color: #fff;
+            padding: 12px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-order:hover {
+            background: #d4a373;
+            color: #2c1810;
+            transform: scale(1.05);
+        }
+
+        /* ===== О НАС ===== */
+        .about {
+            padding: 60px 0;
+            background: #fff;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-image {
+            background: #e8ddd2;
+            border-radius: 24px;
+            height: 320px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            color: #7a6556;
+        }
+
+        .about h2 {
+            font-size: 34px;
+            color: #2c1810;
+            margin-bottom: 15px;
+        }
+
+        .about p {
+            color: #5a4a3a;
+            font-size: 17px;
+            margin-bottom: 15px;
+        }
+
+        .about .features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .about .features div {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+        }
+
+        /* ===== ДОСТАВКА ===== */
+        .delivery {
+            padding: 60px 0;
+            background: #faf6f0;
+        }
+
+        .delivery h2 {
+            text-align: center;
+            font-size: 34px;
+            margin-bottom: 40px;
+            color: #2c1810;
+        }
+
+        .delivery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .delivery-item {
+            padding: 25px;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .delivery-item .icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .delivery-item h4 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .delivery-item p {
+            color: #7a6556;
+            font-size: 14px;
+        }
+
+        /* ===== КОНТАКТЫ ===== */
+        .contacts {
+            padding: 60px 0;
+            background: #fff;
+        }
+
+        .contacts-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .contacts h2 {
+            font-size: 34px;
+            color: #2c1810;
+            margin-bottom: 25px;
+        }
+
+        .contacts .info p {
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+
+        .contacts .info a {
+            color: #2c1810;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .contacts .info a:hover {
+            color: #d4a373;
+        }
+
+        .map-placeholder {
+            background: #e8ddd2;
+            border-radius: 20px;
+            height: 280px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: #7a6556;
+        }
+
+        /* ===== ПОДВАЛ ===== */
+        footer {
+            background: #2c1810;
+            color: #b09a8a;
+            padding: 30px 0;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        footer a {
+            color: #d4a373;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        footer a:hover {
+            color: #fff;
+        }
+
+        /* ===== АДАПТИВ ===== */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero p {
+                font-size: 17px;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .about-image {
+                height: 200px;
+            }
+
+            .contacts-grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                gap: 15px;
+            }
+
+            nav a {
+                font-size: 14px;
+            }
+
+            .logo {
+                font-size: 22px;
+            }
+
+            .catalog h2 {
+                font-size: 28px;
+            }
+
+            .btn-primary {
+                padding: 14px 35px;
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header .container {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            nav {
+                justify-content: center;
+                gap: 12px;
+            }
+
+            .catalog-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 15px;
+            }
+
+            .product-card {
+                padding: 15px;
+            }
+
+            .product-card .price {
+                font-size: 18px;
+            }
+
+            .about .features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ===== ШАПКА ===== -->
+    <header>
+        <div class="container">
+            <div class="logo">☕ <span>Кофе</span>Хаус</div>
+            <nav>
+                <a href="#catalog">Каталог</a>
+                <a href="#about">О нас</a>
+                <a href="#delivery">Доставка</a>
+                <a href="#contacts">Контакты</a>
+                <span class="cart-icon">🛒 Корзина</span>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ===== ГЛАВНЫЙ ЭКРАН ===== -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>Кофе, который <span>вдохновляет</span></h1>
+            <p>Свежая обжарка, прямой импорт зёрен и доставка по всему городу. Попробуйте вкус настоящего кофе.</p>
+            <a href="#catalog" class="btn-primary">Выбрать кофе →</a>
+        </div>
+    </section>
+
+    <!-- ===== КАТАЛОГ ===== -->
+    <section class="catalog" id="catalog">
+        <div class="container">
+            <h2>Наш каталог</h2>
+            <p class="subtitle">Только свежая обжарка — заказывайте с доставкой</p>
+            <div class="catalog-grid">
+
+                <!-- Товар 1 -->
+                <div class="product-card">
+                    <img src="https://picsum.photos/seed/coffee1/400/300" alt="Эфиопский кофе">
+                    <h3>Эфиопия Сидамо</h3>
+                    <p class="origin">🇪🇹 Арабика, светлая обжарка</p>
+                    <div class="price">1 290 ₽ <span>/ 1 кг</span></div>
+                    <a href="https://wa.me/71234567890?text=Хочу%20заказать%20Эфиопия%20Сидамо" target="_blank"
+                        class="btn-order">Заказать в WhatsApp</a>
+                </div>
+
+                <!-- Товар 2 -->
+                <div class="product-card">
+                    <img src="https://picsum.photos/seed/coffee2/400/300" alt="Колумбийский кофе">
+                    <h3>Колумбия Супремо</h3>
+                    <p class="origin">🇨🇴 Арабика, средняя обжарка</p>
+                    <div class="price">1 450 ₽ <span>/ 1 кг</span></div>
+                    <a href="https://wa.me/71234567890?text=Хочу%20заказать%20Колумбия%20Супремо" target="_blank"
+                        class="btn-order">Заказать в WhatsApp</a>
+                </div>
+
+                <!-- Товар 3 -->
+                <div class="product-card">
+                    <img src="https://picsum.photos/seed/coffee3/400/300" alt="Бразильский кофе">
+                    <h3>Бразилия Серрадо</h3>
+                    <p class="origin">🇧🇷 Арабика, тёмная обжарка</p>
+                    <div class="price">1 150 ₽ <span>/ 1 кг</span></div>
+                    <a href="https://wa.me/71234567890?text=Хочу%20заказать%20Бразилия%20Серрадо" target="_blank"
+                        class="btn-order">Заказать в WhatsApp</a>
+                </div>
+
+                <!-- Товар 4 -->
+                <div class="product-card">
+                    <img src="https://www.goodfon.ru/food/wallpaper-download-1920x1080-kofe-chashka-kofeinye-zerna-seryi-fon.html"
+                        alt="Кения кофе">
+                    <h3>Кения АА Топу</h3>
+                    <p class="origin">🇰🇪 Арабика, светлая обжарка</p>
+                    <div class="price">1 650 ₽ <span>/ 1 кг</span></div>
+                    <a href="https://wa.me/71234567890?text=Хочу%20заказать%20Кения%20АА%20Топу" target="_blank"
+                        class="btn-order">Заказать в WhatsApp</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== О НАС ===== -->
+    <section class="about" id="about">
+        <div class="container about-grid">
+            <div class="about-image">
+                🌱
+            </div>
+            <div>
+                <h2>О нашей кофейне</h2>
+                <p>Мы обжариваем кофе вручную маленькими партиями, чтобы сохранить весь букет вкуса. Сотрудничаем
+                    напрямую с фермерами из Эфиопии, Колумбии, Бразилии и Кении.</p>
+                <p>Каждый мешок зёрен проходит отбор — мы гарантируем свежесть и качество.</p>
+                <div class="features">
+                    <div>☕ Свежая обжарка</div>
+                    <div>🌍 Прямые поставки</div>
+                    <div>📦 Доставка за 2 часа</div>
+                    <div>💯 100% Арабика</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ДОСТАВКА ===== -->
+    <section class="delivery" id="delivery">
+        <div class="container">
+            <h2>Условия доставки</h2>
+            <div class="delivery-grid">
+                <div class="delivery-item">
+                    <div class="icon">🚚</div>
+                    <h4>Бесплатная доставка</h4>
+                    <p>При заказе от 2 500 ₽ в пределах города</p>
+                </div>
+                <div class="delivery-item">
+                    <div class="icon">⏱️</div>
+                    <h4>Скорость</h4>
+                    <p>Доставим в течение 2 часов после заказа</p>
+                </div>
+                <div class="delivery-item">
+                    <div class="icon">🔄</div>
+                    <h4>Обмен</h4>
+                    <p>Если не понравится — вернём деньги</p>
+                </div>
+                <div class="delivery-item">
+                    <div class="icon">📦</div>
+                    <h4>Упаковка</h4>
+                    <p>Вакуумная упаковка сохраняет свежесть</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== КОНТАКТЫ ===== -->
+    <section class="contacts" id="contacts">
+        <div class="container contacts-grid">
+            <div class="info">
+                <h2>Контакты</h2>
+                <p>📞 <a href="tel:+71234567890">+7 (123) 456-78-90</a></p>
+                <p>✉️ <a href="mailto:info@kofehaus.ru">info@kofehaus.ru</a></p>
+                <p>📍 г. Москва, ул. Арбат, д. 15</p>
+                <p>🕐 Ежедневно с 09:00 до 21:00</p>
+                <p style="margin-top: 20px;">
+                    <a href="https://wa.me/71234567890" target="_blank" style="margin-right:15px;">💬 WhatsApp</a>
+                    <a href="https://t.me/kofehaus" target="_blank">📱 Telegram</a>
+                </p>
+            </div>
+            <div>
+                <div class="map-placeholder">
+                    🗺️ Здесь будет карта (Яндекс.Карты или Google Maps)
+                </div>
+                <p style="text-align:center; color:#7a6556; font-size:13px; margin-top:10px;">
+                    * Вставьте сюда код карты с вашим адресом
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ПОДВАЛ ===== -->
+    <footer>
+        <div class="container">
+            <p>© 2026 КофеХаус — доставка свежеобжаренного кофе</p>
+            <p>
+                <a href="#">Политика конфиденциальности</a> |
+                <a href="#">Договор оферты</a>
+            </p>
+        </div>
+    </footer>
+
+</body>
+
+</html>
