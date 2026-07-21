@@ -301,16 +301,26 @@
         .contacts__info a:hover {
             color: #d4a373;
         }
-        .contacts__map {
-            background: #e8ddd2;
-            border-radius: 20px;
-            height: 280px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            color: #7a6556;
-        }
+        /* Блок-контейнер для карты */
+.contacts__map {
+    border-radius: 20px;
+    overflow: hidden;   /* чтобы карта не вылезала за скруглённые углы */
+    background: #e8ddd2; /* запасной фон */
+    height: 280px;      /* задаём желаемую высоту (можно менять) */
+}
+
+/* Обёртка для iframe, чтобы он заполнил весь родитель */
+.map-wrapper {
+    width: 100%;
+    height: 100%;
+}
+
+.map-wrapper iframe {
+    display: block;
+    width: 100% !important;
+    height: 100% !important;
+    border: 0;
+}
 
         /* ===== Блок footer ===== */
         .footer {
@@ -534,10 +544,12 @@
                     <a href="https://t.me/kofehaus" target="_blank">📱 Telegram</a>
                 </p>
             </div>
-            <div class="contacts__map">
-                🗺️ Здесь будет карта (Яндекс.Карты или Google Maps)
-            </div>
-        </div>
+      <div class="contacts__map">
+    <div class="map-wrapper">
+        <!-- сюда вставьте ваш код карты (iframe или div) -->
+        <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A972ce6d26c68aa5234e4410ac976362858276825e6150d2f787342b76e450a71&amp;source=constructor">frameborder="0" allowfullscreen loading="lazy"></iframe>
+    </div>
+</div>
     </section>
 
     <footer class="footer">
